@@ -1,0 +1,24 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ta-appointment-service
+  description: |
+    Powers the scheduling of appointments with partners an other resources.
+  namespace: scheduling
+  labels:
+    gid-prefix: 0010
+  tags:
+    - node
+    - gid-prefix-0010
+  links:
+    - title: Health Endpoint
+      url: https://ta-appointment-service.audibene.net/sys/health
+    - title: Documentation
+      url: https://miro.com/app/board/o9J_lCepDkc=/
+  annotations:
+    github.com/project-slug: Audibene-GMBH/ta-appointment-service
+spec:
+  type: service
+  owner: telaudiology
+  lifecycle: production
+  definition: $yaml: ./src/api/specs/v1/openapi.yml
