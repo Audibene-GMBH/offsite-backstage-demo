@@ -6,7 +6,7 @@ metadata:
     Powers the scheduling of appointments with partners an other resources.
   namespace: scheduling
   labels:
-    gid-prefix: 0010
+    gid-prefix: "0010"
   tags:
     - node
     - gid-prefix-0010
