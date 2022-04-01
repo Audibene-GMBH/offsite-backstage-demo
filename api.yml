@@ -12,5 +12,1726 @@ spec:
   type: API
   owner: telaudiology
   lifecycle: production
-  definition: 
-    $yaml: ./openapi.yml
+  definition: |
+    openapi: 3.0.0
+    components:
+      examples:
+        HealthCheckBad:
+          value:
+            db: FAIL
+            title: Appointment Service
+            version: v1.0.0
+        HealthCheckOK:
+          value:
+            db: OK
+            title: Appointment Service
+            version: v1.0.0
+      responses:
+        Appointment:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+          description: Appointment
+        AppointmentTypeConfiguration:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppointmentTypeConfiguration'
+          description: Appointment Type Configuration
+        AvailabilitiesResponse:
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Availability'
+                type: array
+          description: Time zone map
+        BadGateway:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad Gateway
+        BadRequest:
+          content:
+            application/json:
+              example:
+                error_code: BAD_REQUEST
+                error_message: Could not parse request payload
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Bad request
+        CalendarIntegrationIdentityMapping:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalendarIntegrationIdentityMapping'
+          description: Calendar Integration
+        CalendarIntegration:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalendarIntegration'
+          description: Calendar Integration
+        CountryJourneyAppointmentTypeConfiguration:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountryJourneyAppointmentTypeConfiguration'
+          description: Appointment Type Configuration
+        Customer:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+          description: Customer
+        Forbidden:
+          content:
+            application/json:
+              example:
+                error_code: ACTION_FORBIDDEN
+                error_message: Forbidden
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Action is forbidden
+        HealthOkay:
+          content:
+            application/json:
+              examples:
+                Bad:
+                  $ref: '#/components/examples/HealthCheckBad'
+                Good:
+                  $ref: '#/components/examples/HealthCheckOK'
+              schema:
+                properties:
+                  db:
+                    enum:
+                      - OK
+                      - FAIL
+                    type: string
+                  title:
+                    type: string
+                  version:
+                    type: string
+                type: object
+          description: Service health details
+        InternalServerError:
+          content:
+            application/json:
+              example:
+                error_code: INTERNAL_ERROR
+                error_message: Internal server error
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal Server Error
+        NotFound:
+          content:
+            application/json:
+              example:
+                error_code: RESOURCE_NOT_FOUND
+                error_message: Account with id 0039E432115QUcECAW is not found
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Account is not found
+        OKResponse:
+          content:
+            application/json:
+              example:
+                message: OK
+              schema:
+                $ref: '#/components/schemas/OKResponse'
+          description: The request succeeded
+        PaginatedAppointmentsResponse:
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/Appointment'
+                    type: array
+                  meta:
+                    $ref: '#/components/schemas/Pagination'
+                    type: object
+                type: object
+          description: A page of appointments
+        PaginatedCalendarIntegrationIdentityMappingsResponse:
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/CalendarIntegrationIdentityMapping'
+                    type: array
+                  meta:
+                    $ref: '#/components/schemas/Pagination'
+                    type: object
+                type: object
+          description: A page of calendar integration identity mappings
+        PaginatedCalendarIntegrationsResponse:
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/CalendarIntegration'
+                    type: array
+                  meta:
+                    $ref: '#/components/schemas/Pagination'
+                    type: object
+                type: object
+          description: A page of calendar integrations
+        PaginatedCustomersResponse:
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/Customer'
+                    type: array
+                  meta:
+                    $ref: '#/components/schemas/Pagination'
+                    type: object
+                type: object
+          description: A page of customers
+        PaginatedResourcesResponse:
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/Resource'
+                    type: array
+                  meta:
+                    $ref: '#/components/schemas/Pagination'
+                    type: object
+                type: object
+          description: A page of resources
+        PaginatedShopsResponse:
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/Shop'
+                    type: array
+                  meta:
+                    $ref: '#/components/schemas/Pagination'
+                    type: object
+                type: object
+          description: A page of shops
+        Resource:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+          description: Resource
+        Shop:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shop'
+          description: Shop
+        TimeZoneResponse:
+          content:
+            application/json:
+              schema:
+                properties:
+                  America/Denver:
+                    $ref: '#/components/schemas/TimeZone'
+                  Europe/Berlin:
+                    $ref: '#/components/schemas/TimeZone'
+                type: object
+          description: Time zone map
+        Unauthorized:
+          content:
+            application/json:
+              example:
+                error_code: ACTION_UNAUTHORIZED
+                error_message: Unauthorized
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Authentication required
+      schemas:
+        Account:
+          description: An account for audit tracking
+          properties:
+            email:
+              format: email
+              type: string
+            id:
+              type: string
+          type: object
+        Appointment:
+          description: Appointment
+          properties:
+            country:
+              $ref: '#/components/schemas/Country'
+            created_at:
+              type: string
+            created_by:
+              $ref: '#/components/schemas/Account'
+            customer:
+              $ref: '#/components/schemas/Customer'
+            description:
+              type: string
+            duration_in_minutes:
+              type: number
+            id:
+              $ref: '#/components/schemas/Uuid'
+            journey:
+              $ref: '#/components/schemas/Journey'
+            opportunity_gid:
+              type: string
+            resources:
+              items:
+                $ref: '#/components/schemas/Resource'
+              type: array
+            start_date:
+              $ref: '#/components/schemas/DateTime'
+            status:
+              $ref: '#/components/schemas/AppointmentStatusDetail'
+            title:
+              type: string
+            type:
+              $ref: '#/components/schemas/AppointmentTypeConfiguration'
+            updated_at:
+              $ref: '#/components/schemas/DateTime'
+            updated_by:
+              $ref: '#/components/schemas/Account'
+          type: object
+        AppointmentDuration:
+          enum:
+            - 30
+            - 60
+          type: number
+        AppointmentStatus:
+          enum:
+            - CANCELED
+            - COMPLETED
+            - CONFIRMED
+            - DENIED
+            - PENDING
+            - RESCHEDULED
+          type: string
+        AppointmentStatusDetail:
+          description: The appointment status details
+          properties:
+            appointment_id:
+              $ref: '#/components/schemas/Uuid'
+            created_at:
+              type: string
+            created_by:
+              $ref: '#/components/schemas/Account'
+            details:
+              nullable: true
+              oneOf:
+                - $ref: '#/components/schemas/CancellationDetails'
+                - $ref: '#/components/schemas/RescheduleDetails'
+            id:
+              $ref: '#/components/schemas/Uuid'
+            status:
+              $ref: '#/components/schemas/AppointmentStatus'
+        AppointmentType:
+          enum:
+            - FOLLOW_UP
+            - HEARING_AID_EVALUATION
+          type: string
+        AppointmentTypeConfiguration:
+          description: Appointment Type Configuration
+          properties:
+            appointment_type:
+              $ref: '#/components/schemas/AppointmentType'
+            country:
+              $ref: '#/components/schemas/Country'
+            duration_in_minutes:
+              $ref: '#/components/schemas/AppointmentDuration'
+            journey:
+              $ref: '#/components/schemas/Journey'
+          type: object
+        Availability:
+          description: An availability object
+          properties:
+            blocks:
+              items:
+                $ref: '#/components/schemas/TimeBlock'
+              type: array
+            duration_in_minutes:
+              example: 30
+              type: number
+            resource_id:
+              $ref: '#/components/schemas/Uuid'
+        CalendarIntegrationIdentityMappingType:
+          enum:
+            - RESOURCE
+            - SHOP
+          type: string
+        CalendarIntegrationIdentityMapping:
+          description: Calendar Integration Identity Mapping
+          properties:
+            calendar_integration_type:
+              $ref: '#/components/schemas/CalendarIntegrationType'
+            external_id:
+              type: string
+            id:
+              $ref: '#/components/schemas/Uuid'
+            internal_id:
+              $ref: '#/components/schemas/Uuid'
+            type:
+              $ref: '#/components/schemas/CalendarIntegrationIdentityMappingType'
+        CalendarIntegration:
+          description: Calendar Integration
+          properties:
+            created_at:
+              type: string
+            created_by:
+              $ref: '#/components/schemas/Account'
+            id:
+              $ref: '#/components/schemas/Uuid'
+            name:
+              type: string
+            resource_id:
+              $ref: '#/components/schemas/Uuid'
+            type:
+              $ref: '#/components/schemas/CalendarIntegrationType'
+            updated_at:
+              $ref: '#/components/schemas/DateTime'
+            updated_by:
+              $ref: '#/components/schemas/Account'
+        CalendarIntegrationCredentialsOutlookInternal:
+          description: Calendar Integration Credentials Outlook Internal
+          properties:
+            email:
+              $ref: '#/components/schemas/Email'
+        CalendarIntegrationCredentialsSycle:
+          description: Calendar Integration Credentials Sycle
+          properties:
+            staff_id:
+              type: string
+        CalendarIntegrationType:
+          enum:
+            - OUTLOOK_INTERNAL
+            - SYCLE
+          type: string
+        CancelAppointmentRequest:
+          properties:
+            description:
+              type: string
+            reason:
+              $ref: '#/components/schemas/CancellationReason'
+          type: object
+        CancellationDetails:
+          properties:
+            description:
+              type: string
+            reason:
+              $ref: '#/components/schemas/CancellationReason'
+        CancellationReason:
+          enum:
+            - CUSTOMER_NOT_INTERESTED
+            - OTHER
+          type: string
+        Country:
+          enum:
+            - US
+          type: string
+        CountryJourneyAppointmentTypeConfiguration:
+          description: Appointment Type Configuration based on country and journey
+          properties:
+            FOLLOW_UP:
+              properties:
+                appointment_type:
+                  example: FOLLOW_UP
+                  type: string
+                country:
+                  type: string
+                duration_in_minutes:
+                  $ref: '#/components/schemas/AppointmentDuration'
+                journey:
+                  type: string
+              type: object
+          type: object
+        CreateAppointmentRequest:
+          description: Appointment request
+          properties:
+            country:
+              $ref: '#/components/schemas/Country'
+            customer_id:
+              $ref: '#/components/schemas/Uuid'
+            description:
+              type: string
+            duration_in_minutes:
+              type: number
+            journey:
+              $ref: '#/components/schemas/Journey'
+            opportunity_gid:
+              type: string
+            resource_ids:
+              items:
+                $ref: '#/components/schemas/Uuid'
+              type: array
+            start_date:
+              $ref: '#/components/schemas/DateTime'
+            title:
+              type: string
+            type:
+              $ref: '#/components/schemas/AppointmentType'
+          type: object
+        CreateCalendarIntegrationIdentityMappingRequest:
+          properties:
+            calendar_integration_type:
+              $ref: '#/components/schemas/CalendarIntegrationType'
+            external_id:
+              type: string
+            id:
+              $ref: '#/components/schemas/Uuid'
+            internal_id:
+              $ref: '#/components/schemas/Uuid'
+            type:
+              $ref: '#/components/schemas/CalendarIntegrationIdentityMappingType'
+          type: object
+        CreateCalendarIntegrationRequest:
+          properties:
+            credentials:
+              oneOf:
+                - $ref: '#/components/schemas/CalendarIntegrationCredentialsOutlookInternal'
+                - $ref: '#/components/schemas/CalendarIntegrationCredentialsSycle'
+            name:
+              type: string
+            type:
+              $ref: '#/components/schemas/CalendarIntegrationType'
+          type: object
+        CreateCustomerRequest:
+          properties:
+            family_name:
+              type: string
+            gid:
+              type: string
+            given_name:
+              type: string
+            salutation:
+              $ref: '#/components/schemas/Salutation'
+            timezone:
+              type: string
+          type: object
+        CreateResourceRequest:
+          properties:
+            email:
+              $ref: '#/components/schemas/Email'
+            gid:
+              type: string
+            name:
+              type: string
+            shop_id:
+              $ref: '#/components/schemas/Uuid'
+            timezone:
+              type: string
+            type:
+              $ref: '#/components/schemas/ResourceType'
+          type: object
+        CreateShopRequest:
+          properties:
+            country:
+              $ref: '#/components/schemas/Country'
+            gid:
+              type: string
+            name:
+              type: string
+          type: object
+        Customer:
+          properties:
+            created_at:
+              $ref: '#/components/schemas/Account'
+            family_name:
+              type: string
+            gid:
+              type: string
+            given_name:
+              type: string
+            id:
+              $ref: '#/components/schemas/Uuid'
+            salutation:
+              $ref: '#/components/schemas/Salutation'
+            timezone:
+              type: string
+            updated_at:
+              $ref: '#/components/schemas/Account'
+          type: object
+        DateTime:
+          format: date-time
+          type: string
+        DeleteCalendarIntegrationIdentityMappingRequest:
+          properties:
+            id:
+              $ref: '#/components/schemas/Uuid'
+          type: object
+        Email:
+          format: email
+          type: string
+        Error:
+          description: Error response
+          properties:
+            error_code:
+              description: The error code
+              example: BADREQUEST
+              type: string
+            error_message:
+              description: Error message with further details
+              example: Please check your query parameters
+              type: string
+          required:
+            - error_code
+            - error_message
+          type: object
+        Journey:
+          enum:
+            - TELEAUDIOLOGY
+          type: string
+        OKResponse:
+          description: OK response
+          properties:
+            message:
+              example: OK
+              type: string
+        Pagination:
+          properties:
+            meta:
+              properties:
+                items_total:
+                  example: 1
+                  type: number
+                page:
+                  example: 0
+                  type: number
+                page_size:
+                  example: 100
+                  type: number
+                pages_total:
+                  example: 1
+                  type: number
+              type: object
+          type: object
+        RescheduleDetails:
+          properties:
+            description:
+              type: string
+            reason:
+              $ref: '#/components/schemas/RescheduleReason'
+            replacement_appointment_id:
+              $ref: '#/components/schemas/Uuid'
+        RescheduleAppointmentRequest:
+          properties:
+            description:
+              type: string
+            reason:
+              $ref: '#/components/schemas/RescheduleReason'
+            replacement_appointment_id:
+              $ref: '#/components/schemas/Uuid'
+          type: object
+        RescheduleReason:
+          enum:
+            - CUSTOMER_NOT_AVAILABLE
+            - OTHER
+          type: string
+        Resource:
+          properties:
+            created_at:
+              $ref: '#/components/schemas/DateTime'
+            email:
+              $ref: '#/components/schemas/Email'
+            gid:
+              type: string
+            id:
+              $ref: '#/components/schemas/Uuid'
+            name:
+              type: string
+            shop_id:
+              $ref: '#/components/schemas/Uuid'
+            timezone:
+              type: string
+            type:
+              $ref: '#/components/schemas/ResourceType'
+            updated_at:
+              $ref: '#/components/schemas/DateTime'
+          type: object
+        ResourceType:
+          enum:
+            - FITTER
+          type: string
+        Salutation:
+          enum:
+            - MISS
+            - MISSES
+            - MISTER
+          type: string
+        Shop:
+          properties:
+            country:
+              $ref: '#/components/schemas/Country'
+            created_at:
+              $ref: '#/components/schemas/DateTime'
+            gid:
+              type: string
+            id:
+              $ref: '#/components/schemas/Uuid'
+            name:
+              type: string
+            resources:
+              items:
+                $ref: '#/components/schemas/Resource'
+              type: array
+            updated_at:
+              $ref: '#/components/schemas/DateTime'
+          type: object
+        SortDirection:
+          enum:
+            - asc
+            - desc
+          type: string
+        TimeZone:
+          properties:
+            abbreviation:
+              type: string
+            alternative_name:
+              type: string
+            cities:
+              items:
+                type: string
+              type: array
+            continent_name:
+              type: string
+            country_code:
+              type: string
+            country_name:
+              type: string
+            current_time_offset_in_minutes:
+              type: number
+            group:
+              items:
+                type: string
+              type: array
+            name:
+              type: string
+          type: object
+        TimeBlock:
+          properties:
+            date_start:
+              $ref: '#/components/schemas/DateTime'
+            date_end:
+              $ref: '#/components/schemas/DateTime'
+        UpdateCalendarIntegrationIdentityMappingRequest:
+          properties:
+            external_id:
+              type: string
+          type: object
+        Uuid:
+          example: 00000000-0000-0000-0000-000000000000
+          format: uuid
+          type: string
+      securitySchemes:
+        BearerAuth:
+          bearerFormat: JWT
+          scheme: bearer
+          type: http
+    info:
+      contact:
+        email: team-america@hear.com
+      description: Audibene service for creating and modifying appointments
+      title: Appointment Service
+      version: 1.0.0
+    paths:
+      /api/v1/appointment-types:
+        get:
+          description: Return the appointment types map for a given `country` and `journey`
+          operationId: getAppointmentTypes
+          parameters:
+            - description: The two letter country iso code
+              in: query
+              name: country
+              required: true
+              schema:
+                $ref: '#/components/schemas/Country'
+            - description: The customer journey
+              in: query
+              name: journey
+              required: true
+              schema:
+                $ref: '#/components/schemas/Journey'
+          responses:
+            '200':
+              $ref: '#/components/responses/CountryJourneyAppointmentTypeConfiguration'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Get appointment types map
+          tags:
+            - Appointment Types
+      /api/v1/appointments:
+        get:
+          description: You may filter and sort by query string parameters
+          operationId: getManyAppointments
+          parameters:
+            - description: The country the appointment will take place
+              in: query
+              name: country
+              schema:
+                items:
+                  $ref: '#/components/schemas/Country'
+                type: array
+            - description: The date the appointment was created
+              in: query
+              name: created_at
+              schema:
+                items:
+                  $ref: '#/components/schemas/DateTime'
+                type: array
+            - description: The global id for a customer. Currently defined by Salesforce. This is typically the customer gid. E.g. `0039E432115QUcDWGH`. **Note this is NOT the opportunity gid.**
+              in: query
+              name: customer_gid
+              schema:
+                items:
+                  type: string
+                type: array
+            - description: The global customer id. Currently defined by this appointment service.
+              in: query
+              name: customer_id
+              schema:
+                items:
+                  $ref: '#/components/schemas/Uuid'
+                type: array
+            - description: The start date for an appointment `start_date` range search
+              in: query
+              name: date_start
+              schema:
+                format: date-time
+                type: string
+            - description: The end date for an appointment `start_date` range search
+              in: query
+              name: date_end
+              schema:
+                format: date-time
+                type: string
+            - description: Appointment description text
+              in: query
+              name: description
+              schema:
+                items:
+                  type: string
+                type: array
+            - description: Appointment duration in minutes
+              in: query
+              name: duration_in_minutes
+              schema:
+                items:
+                  type: number
+                type: array
+            - description: The customer journey
+              in: query
+              name: journey
+              schema:
+                items:
+                  $ref: '#/components/schemas/Journey'
+                type: array
+            - description: The global appointment identifier
+              in: query
+              name: id
+              schema:
+                items:
+                  $ref: '#/components/schemas/Uuid'
+                type: array
+            - description: The global id for the the opportunity. Currently defined by Salesforce. This is typically the customer's opportunity gid. E.g. `0039E432115QUcDWGH`
+              in: query
+              name: opportunity_gid
+              schema:
+                items:
+                  type: string
+                type: array
+            - description: Number of results per page
+              in: query
+              name: page_size
+              schema:
+                type: number
+            - description: Specific page of results in paginated response
+              in: query
+              name: page
+              schema:
+                type: number
+            - description: The global id for the resource. Currently defined by Salesforce. This is typically the hearing coach's gid. E.g. `0039E432115QUcDWGH`
+              in: query
+              name: resource_gid
+              schema:
+                items:
+                  type: string
+                type: array
+            - description: The global resource id. Currently defined by this appointment service.
+              in: query
+              name: resource_id
+              schema:
+                items:
+                  $ref: '#/components/schemas/Uuid'
+                type: array
+            - description: The global id for the shop. Currently defined by Salesforce. E.g `0039E432115QUcDWGH`
+              in: query
+              name: shop_gid
+              schema:
+                items:
+                  type: string
+                type: array
+            - description: The global shop id. Currently defined by this appointment service.
+              in: query
+              name: shop_id
+              schema:
+                items:
+                  $ref: '#/components/schemas/Uuid'
+                type: array
+            - description: Field to sort by
+              in: query
+              name: sort_by
+              schema:
+                enum:
+                  - country
+                  - created_at
+                  - customer_id
+                  - customer_gid
+                  - description
+                  - duration_in_minutes
+                  - id
+                  - journey
+                  - opportunity_gid
+                  - resource_id
+                  - resource_gid
+                  - shop_id
+                  - shop_gid
+                  - start_date
+                  - status
+                  - title
+                  - type
+                  - updated_at
+                type: string
+            - description: Sort direction
+              in: query
+              name: sort
+              schema:
+                $ref: '#/components/schemas/SortDirection'
+            - description: Appointment Start Date
+              in: query
+              name: start_date
+              schema:
+                items:
+                  format: date-time
+                  type: string
+                type: array
+            - description: Appointment Status
+              in: query
+              name: status
+              schema:
+                items:
+                  $ref: '#/components/schemas/AppointmentStatus'
+                type: array
+            - description: Appointment Title
+              in: query
+              name: title
+              schema:
+                items:
+                  type: string
+                type: array
+            - description: Appointment Type
+              in: query
+              name: type
+              schema:
+                items:
+                  $ref: '#/components/schemas/AppointmentType'
+                type: array
+            - description: Appointment last update date
+              in: query
+              name: updated_at
+              schema:
+                items:
+                  format: date-time
+                  type: string
+                type: array
+          responses:
+            '200':
+              $ref: '#/components/responses/PaginatedAppointmentsResponse'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Get a page of appointments
+          tags:
+            - Appointments
+        post:
+          description: |
+            Create a new appointment for the given customer and opportunity gid
+          operationId: createAppointment
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/CreateAppointmentRequest'
+            required: true
+          responses:
+            '200':
+              $ref: '#/components/responses/Appointment'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '404':
+              $ref: '#/components/responses/NotFound'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Create a new appointment
+          tags:
+            - Appointments
+      /api/v1/appointments/{appointmentId}/cancel:
+        patch:
+          operationId: cancelAppointment
+          parameters:
+            - in: path
+              name: appointmentId
+              required: true
+              schema:
+                $ref: '#/components/schemas/Uuid'
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/CancelAppointmentRequest'
+            required: true
+          responses:
+            '200':
+              $ref: '#/components/responses/Appointment'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '404':
+              $ref: '#/components/responses/NotFound'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Cancel an existing appointment
+          tags:
+            - Appointments
+      /api/v1/appointments/{appointmentId}/reschedule:
+        patch:
+          operationId: rescheduleAppointment
+          parameters:
+            - in: path
+              name: appointmentId
+              required: true
+              schema:
+                $ref: '#/components/schemas/Uuid'
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/RescheduleAppointmentRequest'
+            required: true
+          responses:
+            '200':
+              $ref: '#/components/responses/Appointment'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '404':
+              $ref: '#/components/responses/NotFound'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Reschedule an existing appointment
+          tags:
+            - Appointments
+      /api/v1/availability:
+        get:
+          description: You may filter by query string parameters.  Results are always sorted ascending by time block `start_date`.
+          operationId: getManyAvailabilities
+          parameters:
+            - description: Availability duration in minutes
+              in: query
+              name: duration_in_minutes
+              required: true
+              schema:
+                default: 30
+                type: number
+            - description: The start date for an appointment `start_date` range search
+              in: query
+              name: date_start
+              required: true
+              schema:
+                $ref: '#/components/schemas/DateTime'
+            - description: The end date for an appointment `start_date` range search
+              in: query
+              name: date_end
+              required: true
+              schema:
+                $ref: '#/components/schemas/DateTime'
+            - description: The resource ids to search for availabilities
+              in: query
+              name: resource_id
+              schema:
+                items:
+                  $ref: '#/components/schemas/Uuid'
+                type: array
+            - description: The shop id to search for availabilities
+              in: query
+              name: shop_id
+              schema:
+                $ref: '#/components/schemas/Uuid'
+          responses:
+            '200':
+              $ref: '#/components/responses/AvailabilitiesResponse'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Get a availabilities for a set of resources or a shop
+          tags:
+            - Availabilities
+      /api/v1/calendar-integration-identity-mappings:
+        get:
+          description: You may filter and sort by query string parameters
+          operationId: getManyCalendarIntegrationIdentityMappings
+          parameters:
+            - description: The calendar integration identity mapping's calendar integration type
+              in: query
+              name: calendar_integration_type
+              schema:
+                items:
+                  $ref: '#/components/schemas/CalendarIntegrationType'
+                type: array
+            - description: The calendar integration's external identity
+              in: query
+              name: external_id
+              schema:
+                items:
+                  type: string
+                type: array
+            - description: The calendar integration identity mapping's identifier. Currently defined by this appointment service.
+              in: query
+              name: id
+              schema:
+                items:
+                  $ref: '#/components/schemas/Uuid'
+                type: array
+            - description: The calendar integration's internal identity
+              in: query
+              name: internal_id
+              schema:
+                items:
+                  $ref: '#/components/schemas/Uuid'
+                type: array
+            - description: The calendar integration identity mapping's type
+              in: query
+              name: type
+              schema:
+                items:
+                  $ref: '#/components/schemas/CalendarIntegrationIdentityMappingType'
+                type: array
+          responses:
+            '200':
+              $ref: '#/components/responses/PaginatedCalendarIntegrationIdentityMappingsResponse'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Get a page of calendar integration identity mappings
+          tags:
+            - Calendar Integration Identity Mappings
+        post:
+          operationId: createCalendarIntegrationIdentityMapping
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/CreateCalendarIntegrationIdentityMappingRequest'
+            required: true
+          responses:
+            '200':
+              $ref: '#/components/responses/CalendarIntegrationIdentityMapping'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '404':
+              $ref: '#/components/responses/NotFound'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Create a new calendar integration
+          tags:
+            - Calendar Integration Identity Mappings
+      /api/v1/calendar-integration-identity-mappings/{calendarIntegrationIdentityMappingId}:
+        delete:
+          operationId: deleteCalendarIntegrationIdentityMapping
+          parameters:
+            - in: path
+              name: calendarIntegrationIdentityMappingId
+              required: true
+              schema:
+                $ref: '#/components/schemas/Uuid'
+          responses:
+            '200':
+              $ref: '#/components/responses/OKResponse'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '404':
+              $ref: '#/components/responses/NotFound'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Delete an existing calendar integration identity mapping
+          tags:
+            - Calendar Integration Identity Mappings
+        patch:
+          operationId: updateCalendarIntegrationIdentityMapping
+          parameters:
+            - in: path
+              name: calendarIntegrationIdentityMappingId
+              required: true
+              schema:
+                $ref: '#/components/schemas/Uuid'
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/UpdateCalendarIntegrationIdentityMappingRequest'
+            required: true
+          responses:
+            '200':
+              $ref: '#/components/responses/CalendarIntegrationIdentityMapping'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '404':
+              $ref: '#/components/responses/NotFound'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Update an existing calendar integration identity mapping
+          tags:
+            - Calendar Integration Identity Mappings
+      /api/v1/customers:
+        get:
+          description: You may filter and sort by query string parameters
+          operationId: getManyCustomers
+          parameters:
+            - description: The date the customer was created
+              in: query
+              name: created_at
+              schema:
+                items:
+                  $ref: '#/components/schemas/DateTime'
+                type: array
+            - description: The customer's family name
+              in: query
+              name: family_name
+              schema:
+                items:
+                  example: Smith
+                  type: string
+                type: array
+            - description: The global id for the customer. Currently this is defined by Salesforce. E.g. `0039E432115QUcECAW`
+              in: query
+              name: gid
+              schema:
+                items:
+                  example: 0039E432115QUcECAW
+                  type: string
+                type: array
+            - description: The customer's given name
+              in: query
+              name: given_name
+              schema:
+                items:
+                  example: Jane
+                  type: string
+                type: array
+            - description: The id for an customer. Currently defined by this appointment service.
+              in: query
+              name: id
+              schema:
+                items:
+                  $ref: '#/components/schemas/Uuid'
+                type: array
+            - description: The customer's salutation
+              in: query
+              name: salutation
+              schema:
+                items:
+                  $ref: '#/components/schemas/Salutation'
+                type: array
+            - description: The customer's IANA time zone
+              in: query
+              name: timezone
+              schema:
+                items:
+                  example: America/New_York
+                  type: string
+                type: array
+            - description: The date the customer was updated
+              in: query
+              name: updated_at
+              schema:
+                items:
+                  $ref: '#/components/schemas/DateTime'
+                type: array
+          responses:
+            '200':
+              $ref: '#/components/responses/PaginatedCustomersResponse'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Get a page of customers
+          tags:
+            - Customers
+        post:
+          operationId: createCustomer
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/CreateCustomerRequest'
+            required: true
+          responses:
+            '200':
+              $ref: '#/components/responses/Customer'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '404':
+              $ref: '#/components/responses/NotFound'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Create a new customer
+          tags:
+            - Customers
+      /api/v1/resources:
+        get:
+          description: You may filter and sort by query string parameters
+          operationId: getManyResources
+          parameters:
+            - description: The date the resource was created
+              in: query
+              name: created_at
+              schema:
+                items:
+                  $ref: '#/components/schemas/DateTime'
+                type: array
+            - description: The resource's email
+              in: query
+              name: email
+              schema:
+                items:
+                  $ref: '#/components/schemas/Email'
+                type: array
+            - description: This global resource id. Currently this is defined by Salesforce. E.g. `0039E432115QUcECAWV`
+              in: query
+              name: gid
+              schema:
+                items:
+                  type: string
+                type: array
+            - description: The id for a resource. Currently defined by this appointment service. E.g. `3fa85f64-5717-4562-b3fc-2c963f66afa6`
+              in: query
+              name: id
+              schema:
+                items:
+                  $ref: '#/components/schemas/Uuid'
+                type: array
+            - description: The resource's name
+              in: query
+              name: name
+              schema:
+                items:
+                  example: Jane Smith
+                  type: string
+                type: array
+            - description: The resource's shop id. Currently defined by this appointment service. E.g. `3fa85f64-5717-4562-b3fc-2c963f66afa6`
+              in: query
+              name: shop_id
+              schema:
+                items:
+                  $ref: '#/components/schemas/Uuid'
+                type: array
+            - description: The resource's IANA time zone
+              in: query
+              name: timezone
+              schema:
+                items:
+                  example: America/Denver
+                  type: string
+                type: array
+            - description: The resource's type
+              in: query
+              name: type
+              schema:
+                items:
+                  $ref: '#/components/schemas/ResourceType'
+                type: array
+            - description: Date resource was last updated
+              in: query
+              name: updated_at
+              schema:
+                items:
+                  $ref: '#/components/schemas/DateTime'
+                type: array
+          responses:
+            '200':
+              $ref: '#/components/responses/PaginatedResourcesResponse'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Get a page of resources
+          tags:
+            - Resources
+        post:
+          operationId: createResource
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/CreateResourceRequest'
+            required: true
+          responses:
+            '200':
+              $ref: '#/components/responses/Resource'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '404':
+              $ref: '#/components/responses/NotFound'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Create a new resource
+          tags:
+            - Resources
+      /api/v1/resources/{resourceId}/calendar-integrations:
+        get:
+          description: You may filter and sort by query string parameters
+          operationId: getManyCalendarIntegrations
+          parameters:
+            - description: The calendar integration's resource id
+              in: path
+              name: resourceId
+              required: true
+              schema:
+                $ref: '#/components/schemas/Uuid'
+            - description: The date the calendar integration was created
+              in: query
+              name: created_at
+              schema:
+                items:
+                  $ref: '#/components/schemas/DateTime'
+                type: array
+            - description: The id for an calendar integration. Currently defined by this appointment service.
+              in: query
+              name: id
+              schema:
+                items:
+                  $ref: '#/components/schemas/Uuid'
+                type: array
+            - description: The calendar integration's name
+              in: query
+              name: name
+              schema:
+                items:
+                  example: Work
+                  type: string
+                type: array
+            - description: The calendar integration's type
+              in: query
+              name: type
+              schema:
+                items:
+                  $ref: '#/components/schemas/CalendarIntegrationType'
+                type: array
+            - description: The date the calendar integration was updated
+              in: query
+              name: updated_at
+              schema:
+                items:
+                  $ref: '#/components/schemas/DateTime'
+                type: array
+          responses:
+            '200':
+              $ref: '#/components/responses/PaginatedCalendarIntegrationsResponse'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Get a page of calendar integrations
+          tags:
+            - Resources
+        post:
+          operationId: createCalendarIntegration
+          parameters:
+            - in: path
+              name: resourceId
+              required: true
+              schema:
+                $ref: '#/components/schemas/Uuid'
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/CreateCalendarIntegrationRequest'
+            required: true
+          responses:
+            '200':
+              $ref: '#/components/responses/CalendarIntegration'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '404':
+              $ref: '#/components/responses/NotFound'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Create a new calendar integration
+          tags:
+            - Resources
+      /api/v1/resources/{resourceId}/calendar-integrations/{resourceCalendarIntegrationId}:
+        delete:
+          operationId: deleteResourceCalendarIntegration
+          parameters:
+            - in: path
+              name: resourceId
+              required: true
+              schema:
+                $ref: '#/components/schemas/Uuid'
+            - in: path
+              name: resourceCalendarIntegrationId
+              required: true
+              schema:
+                $ref: '#/components/schemas/Uuid'
+          responses:
+            '200':
+              $ref: '#/components/responses/OKResponse'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '404':
+              $ref: '#/components/responses/NotFound'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Delete an existing resource calendar integration
+          tags:
+            - Resources
+      /api/v1/shops:
+        get:
+          description: You may filter and sort by query string parameters
+          operationId: getManyShops
+          parameters:
+            - description: The country shop is operating from
+              in: query
+              name: country
+              schema:
+                items:
+                  $ref: '#/components/schemas/Country'
+                type: array
+            - description: The date the shop was created
+              in: query
+              name: created_at
+              schema:
+                items:
+                  $ref: '#/components/schemas/DateTime'
+                type: array
+            - description: The global id for the shop. Currently this is defined by Salesforce. E.g. `0039E432115QUcECAW`
+              in: query
+              name: gid
+              schema:
+                items:
+                  type: string
+                type: array
+            - description: The id for an shop. Currently defined by this appointment service. E.g. `3fa85f64-5717-4562-b3fc-2c963f66afa6`
+              in: query
+              name: id
+              schema:
+                items:
+                  $ref: '#/components/schemas/Uuid'
+                type: array
+            - description: Shop Name
+              in: query
+              name: name
+              schema:
+                items:
+                  example: Smith Hearing Inc.
+                  type: string
+                type: array
+            - description: The date the shop was last updated
+              in: query
+              name: updated_at
+              schema:
+                items:
+                  $ref: '#/components/schemas/DateTime'
+                type: array
+          responses:
+            '200':
+              $ref: '#/components/responses/PaginatedShopsResponse'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Get a page of shops
+          tags:
+            - Shops
+        post:
+          operationId: createShop
+          requestBody:
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/CreateShopRequest'
+            required: true
+          responses:
+            '200':
+              $ref: '#/components/responses/Shop'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '404':
+              $ref: '#/components/responses/NotFound'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Create a new shop
+          tags:
+            - Shops
+      /api/v1/time-zones:
+        get:
+          description: You may filter by query string parameter
+          operationId: getManyTimeZones
+          parameters:
+            - description: Country time zone is located in
+              in: query
+              name: country_code
+              schema:
+                $ref: '#/components/schemas/Country'
+            - description: Search query
+              in: query
+              name: search
+              schema:
+                example: denver
+                type: string
+          responses:
+            '200':
+              $ref: '#/components/responses/TimeZoneResponse'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '403':
+              $ref: '#/components/responses/Forbidden'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Return a time zones map
+          tags:
+            - Time Zones
+      /sys/health:
+        get:
+          description: Returns the overall health of the api
+          operationId: getHealth
+          responses:
+            '200':
+              $ref: '#/components/responses/HealthOkay'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+          summary: Health check
+          tags:
+            - Internal
+    security:
+      - BearerAuth: []
+    servers:
+      - description: Test environment
+        url: https://appointment-service.shared-testing.audibene.net
+      - description: Staging environment
+        url: https://appointment-service.shared-staging.audibene.net
+      - description: Production environment
+        url: https://appointment-service.audibene.net
+    tags:
+      - description: Endpoints not exposed to public
+        name: Internal
+      - description: Endpoints related to appointment types
+        name: Appointment Types
+      - description: Endpoints related to appointments
+        name: Appointments
+      - description: Endpoints related to availabilities
+        name: Availabilities
+      - description: Endpoints related to customers
+        name: Customers
+      - description: Endpoints related to resources
+        name: Resources
+      - description: Endpoints related to calendar integration identity mappings
+        name: Calendar Integration Identity Mappings
+      - description: Endpoints related to shops
+        name: Shops
+      - description: Endpoints related to time zones
+        name: Time Zones
+
