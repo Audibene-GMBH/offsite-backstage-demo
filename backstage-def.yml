@@ -19,5 +19,5 @@ spec:
   type: service
   owner: telaudiology
   lifecycle: production
-  definition: 
-    $yaml: ./openapi.yml
+  providesApis: 
+    $yaml: ./api.yml
